@@ -10,6 +10,7 @@ from requests.exceptions import HTTPError
 from insights.client.utilities import get_version_info
 import insights.client.apps.ansible
 from insights.client.apps.ansible.playbook_verifier.contrib import gnupg
+from insights.client.constants import InsightsConstants as constants
 
 __all__ = ("verify", "PlaybookVerificationError")
 
@@ -19,7 +20,7 @@ VERSIONING_URL = 'https://cloud.redhat.com/api/v1/static/egg_version'
 EXCLUDABLE_VARIABLES = ['hosts', 'vars']
 
 logger = getLogger(__name__)
-gpg = gnupg.GPG(gnupghome=pkgutil.extend_path('./insights/client/apps/ansible/playbook_verifier/gnupg', 'gnupg'))
+gpg = gnupg.GPG(gnupghome=constants.insights_core_lib_dir)
 
 class PlaybookVerificationError(Exception):
     """
