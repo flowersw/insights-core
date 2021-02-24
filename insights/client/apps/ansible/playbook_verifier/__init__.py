@@ -20,7 +20,6 @@ VERSIONING_URL = 'https://cloud.redhat.com/api/v1/static/egg_version'
 EXCLUDABLE_VARIABLES = ['hosts', 'vars']
 
 logger = getLogger(__name__)
-gpg = gnupg.GPG(gnupghome=constants.insights_core_lib_dir)
 
 class PlaybookVerificationError(Exception):
     """
@@ -51,7 +50,7 @@ def eggVersioningCheck(checkVersion):
     return currentVersion
 
 
-def getPublicKey():
+def getPublicKey(gpg):
         if not PUBLIC_KEY_FOLDER:
             raise PlaybookVerificationError(message="PUBLIC KEY IMPORT ERROR: Public key file not found")
 
@@ -86,12 +85,13 @@ def excludeDynamicElements(snippet):
 
 
 def executeVerification(snippet, encodedSignature):
+    gpg = gnupg.GPG(gnupghome=constants.insights_core_lib_dir)
     serializedSnippet = bytes(yaml.dump(snippet).encode("UTF-8"))
 
     decodedSignature = base64.b64decode(encodedSignature)
 
     # load public key
-    getPublicKey()
+    getPublicKey(gpg)
 
     fd, fn = tempfile.mkstemp()
     os.write(fd, decodedSignature)

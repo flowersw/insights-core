@@ -89,6 +89,7 @@ def test_playbook_verification_error(call):
         verify(fake_playbook, checkVersion=False)
     assert key_error in str(error.value)
 
+
 @patch('gnupg.GPG.verify_data', return_value=True)
 def test_playbook_verification_success(call):
     with open('insights/client/apps/ansible/test_playbook.yml', 'r') as test_file:
