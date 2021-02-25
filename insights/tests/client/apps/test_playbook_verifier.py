@@ -2,7 +2,6 @@
 
 from insights.client.apps.ansible.playbook_verifier import verify, PlaybookVerificationError
 from insights.client.apps.ansible.playbook_verifier.contrib import oyaml as yaml
-from insights.client.apps.ansible.playbook_verifier.contrib import gnupg
 from mock.mock import patch
 from pytest import raises
 

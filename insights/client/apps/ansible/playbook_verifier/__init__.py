@@ -6,7 +6,6 @@ import requests
 import tempfile
 import pkgutil
 from logging import getLogger
-from requests.exceptions import HTTPError
 from insights.client.utilities import get_version_info
 import insights.client.apps.ansible
 from insights.client.apps.ansible.playbook_verifier.contrib import gnupg
@@ -20,6 +19,7 @@ VERSIONING_URL = 'https://cloud.redhat.com/api/v1/static/egg_version'
 EXCLUDABLE_VARIABLES = ['hosts', 'vars']
 
 logger = getLogger(__name__)
+
 
 class PlaybookVerificationError(Exception):
     """
@@ -117,7 +117,7 @@ def verifyPlaybookSnippet(snippet):
     return executeVerification(snippetCopy, encodedSignature)
 
 
-def verify(playbook, checkVersion = True, skipVerify = False):
+def verify(playbook, checkVersion=True, skipVerify=False):
     """
     Verify the signed playbook.
 
