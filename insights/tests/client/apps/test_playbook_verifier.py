@@ -3,11 +3,8 @@
 from insights.client.apps.ansible.playbook_verifier import verify, PlaybookVerificationError
 from insights.client.apps.ansible.playbook_verifier.contrib import oyaml as yaml
 from insights.client.apps.ansible.playbook_verifier.contrib import gnupg
-from collections import OrderedDict
-from mock.mock import patch, Mock, mock_open
+from mock.mock import patch
 from pytest import raises
-import os
-import six
 
 
 def test_skip_validation():
