@@ -64,8 +64,8 @@ class VDOStatus(YAMLParser):
         'enabled'
         >>> vdo['VDOs']['vdo1']['VDO statistics']['/dev/mapper/vdo1']['1K-blocks']
         7340032
-        >>> vdo['VDO status']
-        OrderedDict([('Date', '2019-07-24 20:48:16-04:00'), ('Node', 'dell-m620-10.rhts.gsslab.pek2.redhat.com')])
+        >>> dict(vdo['VDO status'])
+        {'Date': '2019-07-24 20:48:16-04:00', 'Node': 'dell-m620-10.rhts.gsslab.pek2.redhat.com'}
         >>> vdo['VDOs']['vdo2']['Acknowledgement threads']
         1
         >>> vdo.get_slab_size_of_vol('vdo1')
